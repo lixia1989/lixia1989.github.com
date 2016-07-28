@@ -1,0 +1,12 @@
+@charset "utf-8";
+body{background:url(../img/hudie.jpg)repeat center; _background: skyblue;}
+.grjs{width: 100%; font-size:20px;  margin:60px;}
+.grjs span{ opacity: 0; color:#000;}
+.zj{ width: 100%; height:50px; margin-top: 20px; line-height: 50px; font-size:30px; color:skyblue; font-weight: bold;}
+.zj div{ margin-left: 30px;}
+.zp{width: 100%; margin-top:30px; height:400px;}
+.zp ul{}
+.zp ul li{overflow: hidden; width:230px; height: 230px;  float: left; margin:26px;position: relative;}
+.zp ul li img{width:230px; height: 230px; position: absolute; left: 0; top:0;}
+.zp ul li div{width:230px; height: 230px; background:#000; opacity: 0.4; filter: alpha(opacity=90); position: absolute; left: 0; top:-224px; text-align: center;  line-height: 230px;}
+.zp ul li div span{ font-size: 20px; line-height: 40px; color:#fff; }

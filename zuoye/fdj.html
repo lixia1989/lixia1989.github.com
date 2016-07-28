@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>放大镜</title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{ margin: 0; padding: 0; }
+		body{background:url(../img/love.png); }
+		#box{ width: 200px; height: 200px; border:1px solid #000; position: absolute; left: 100px; top:40px; cursor: all-scroll; }
+		#box img{ width: 100px; height: 200px; position: absolute; left:50px; top: 0; }
+		#box span{ width:60px; height: 60px; background: pink; opacity: 0.5; filter: alpha(opacity=50); position: absolute; left: 0; top:0; z-index: 2; display: none;}
+		#box2{ width:300px; height: 300px; border:1px solid #000; position: absolute; left:301px; top:40px; overflow: hidden; display: none;}
+		#box2 img{ width:300px; height:700px; position: absolute; left: 0; top:0; }
+	</style>
+	<script>
+		window.onload=function(){
+			var oCon = document.getElementById('con');
+			var oBox = document.getElementById('box');
+			var oBox2 = document.getElementById('box2');
+			var oImg = document.getElementById('img');
+			oBox.onmouseover=function(){
+				oCon.style.display='block';
+				oBox2.style.display='block';
+			}
+			oBox.onmouseout=function(){
+				oCon.style.display='none';
+				oBox2.style.display='none';
+			}
+			oBox.onmousemove=function(ev){
+				var oEvent = ev||event;
+				var l=oEvent.clientX-oBox.offsetLeft-oCon.offsetWidth/2;
+				var t=oEvent.clientY-oBox.offsetTop-oCon.offsetHeight/2;
+				if (l<=0){l=0};
+				if(t<=0){t=0};
+				if (l>=oBox.offsetWidth-oCon.offsetWidth){l=oBox.offsetWidth-oCon.offsetWidth};
+				if (t>=oBox.offsetHeight-oCon.offsetHeight){t=oBox.offsetHeight-oCon.offsetHeight};
+				var sceaX= l/(oBox.offsetWidth-oCon.offsetWidth);
+				var sceaY = t/(oBox.offsetHeight-oCon.offsetHeight);
+
+				oCon.style.left=l+'px';
+				oCon.style.top=t+'px';
+
+				oImg.style.left=-sceaX*(oImg.offsetWidth-oBox2.offsetWidth)+'px';
+				oImg.style.top=-sceaY*(oImg.offsetHeight-oBox2.offsetHeight)+'px';
+			};
+		};
+	</script>
+</head>
+<body>
+	<div id="box">
+			<img src="fdj.png" alt="">
+			<span id="con"></span>
+	</div>
+	<div id="box2">
+		<img src="fdj.png" alt="" id="img">
+	</div>
+</body>
+</html>

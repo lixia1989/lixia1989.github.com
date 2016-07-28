@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>圆</title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{ margin: 0; padding: 0; }
+		body{ background: url(../images/82.jpg)repeat center; }
+		#box{width: 400px; height: 400px; border: 1px solid #000; position: absolute; left: 0; top:0; bottom: 0; right: 0; margin: auto; border-radius: 50%;}
+		#box span{ width:60px; height:60px; background:red; position:absolute; left:50%; margin-left:-30px; top:0; margin-top:-30px; border-radius:50%;}
+	</style>
+	<!-- <script src="move.js"></script> -->
+	<script>
+	function rnd(n,m){
+		return parseInt(Math.random()*(m-n)+n);
+	}
+	function d2a(n){
+		return n*Math.PI/180;
+		//弧度转角度
+	};
+	function b2d(n){
+		return n*180/Math.PI;
+		//角度转弧度
+	}
+		window.onload=function(){
+			var oBox = document.getElementById('box');
+			var R=oBox.offsetWidth/2;
+			var N=30;
+			var timer=null;
+			for(var i=0; i<N;i++){
+				var aSpan= document.createElement('span');
+				oBox.appendChild(aSpan);
+			};
+			var aSpan = oBox.children;
+			var bSys=true;
+			document.onclick=function(){
+				if (bSys){
+					for(var i=0; i<aSpan.length; i++){
+						move(aSpan[i],360/N*i);
+					}
+				}else{
+					for(var i=0; i<aSpan.length;i++){
+						move(aSpan[i],0)
+					}
+				}
+				bSys=!bSys
+			}
+			function move(obj,iTarget){
+				clearInterval(obj.timer);
+				var iCont=Math.floor(1000/30);
+				var R=oBox.offsetWidth/2;
+				var start=obj.a||0;
+				var dis=iTarget - start;
+				var n=0;
+				obj.timer=setInterval(function(){
+					n++;
+					var a=1-n/iCont;
+					var cur=start+dis*(1-a*a*a);
+					var x=R+R*Math.sin(d2a(cur));
+					var y=R-R*Math.cos(d2a(cur));
+					obj.a=cur;
+					obj.style.left=x+'px';
+					obj.style.top=y+'px';
+					obj.style.background='rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')';
+					if (n==iCont){
+						clearInterval(obj.timer);
+					};
+				},30)
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+	</div>
+</body>
+</html>

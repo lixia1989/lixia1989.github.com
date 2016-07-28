@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>分块</title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{ margin: 0; padding: 0; }
+		body{ background:#000;}
+		#box{width:700px; height: 400px; background:url(img/0.jpg); margin: 100px auto; position: relative;}
+		#box span{  position: absolute;}
+	</style>
+	<script src="move.js"></script>
+	<script>
+		window.onload=function(){
+			var oBox = document.getElementById('box');
+			var R=4;
+			var C=7;
+			for(var r=0; r<R; r++){
+				for(var c=0; c<C; c++){
+					var oSpan=document.createElement('span');
+					oSpan.style.width=oBox.offsetWidth/C+"px";
+					oSpan.style.height=oBox.offsetHeight/R+"px";
+					oBox.appendChild(oSpan);
+					oSpan.style.left=c*oSpan.offsetWidth+'px';
+					oSpan.style.top=r*oSpan.offsetHeight+'px';
+					oSpan.style.backgroundPosition='-'+c*oSpan.offsetWidth+'px -'+r*oSpan.offsetHeight+'px';
+					oSpan.r=r;
+					oSpan.c=c;
+					
+				};
+			};
+			var timer=null;
+			var typs =true;
+			var iNow = 0;
+			document.onclick=function(){
+				if (!typs) {return}
+					typs=false;
+				var aSpan= oBox.children;
+				iNow++;
+				for(var i=0; i<aSpan.length; i++){
+					;(function(index){
+						setTimeout(function(){
+							aSpan[index].style.backgroundImage='url(img/'+iNow%3+'.jpg)';
+							aSpan[index].style.opacity=0;
+							move(aSpan[index],{opacity:1})
+							if (aSpan[index].r==R-1&& aSpan[index].c==C-1) {
+								typs=true;
+							}
+						},100*(aSpan[index].r+aSpan[index].c))
+					})(i);
+				}
+			}
+
+			
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

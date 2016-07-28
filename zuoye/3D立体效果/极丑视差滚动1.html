@@ -1,0 +1,81 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3D舞台展示 - 智能社 - www.zhinengshe.com</title>
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+<!-- <script src="sss.js"></script> -->
+<script>
+    function $(fn)
+    {
+        if(document.addEventListener)
+        {
+            document.addEventListener('DOMContentLoaded',function()
+            {
+                fn&&fn();
+            },false)
+        }
+        else
+        {
+            document.onreadystatechange = function()
+            {
+                if(document.readyState=='complete')
+                {
+                    fn&&fn();
+                }
+            }
+        }
+    }
+	$(function(){
+		var oUl = document.getElementById('ul_container');
+		var aLi = oUl.children;
+		oUl.onmousedown=function(ev){
+			var oEvent = ev||event;
+			var disY = oEvent.clientY;
+			var disX = oEvent.clientX;
+			var arr=[];
+			var l=0;
+			var t=0;
+			for(var i=0; i<aLi.length; i++){
+				arr[i]={left:aLi[i].offsetLeft,top:aLi[i].offsetTop};
+			};
+			document.onmousemove=function(ev){
+				var oEvent = ev||event;
+				var l = oEvent.clientX - disY;
+				var t = oEvent.clientY - disY;
+				for(var i=0; i<aLi.length; i++){
+					aLi[i].style.left = arr[i].left + l/(5/aLi[i].style.zIndex) + 'px';
+					aLi[i].style.top = arr[i].top + t/(5/aLi[i].style.zIndex) + 'px';
+				};
+			};
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].style.left =arr[i].left+l +'px';
+                aLi[i].style.top = arr[i].top+t + 'px';
+			};
+			document.onmouseup=function(){
+				document.onmousemove=null;
+			}
+			return false;
+		};
+	});
+		
+</script>
+</head>
+
+<body style="height:3000px;">
+
+<ul id="ul_container">
+	<li id="pic1" style="z-index: 3;"><img src="images/1.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic2" style="z-index: 4;"><img src="images/2.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic3" style="z-index: 5;"><img src="images/3.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic4" style="z-index: 4;"><img src="images/4.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic6" style="z-index: 3;"><img src="images/5.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic7" style="z-index: 2;"><img src="images/6.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic8" style="z-index: 5;"><img src="images/7.jpg" alt="www.zhinengshe.com" /></li>
+	<li id="pic5" style="z-index: 1;"></li>
+</ul>
+
+<p>by <a href="http://www.zhinengshe.com">智能社</a> <a href="http://www.zhinengshe.com">www.zhinengshe.com</a></p>
+
+</body>
+</html>

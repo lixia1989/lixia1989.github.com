@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>苹果菜单</title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{margin: 0; padding: 0; }
+		body{ background:#200100; }
+		#box{ width: 100%; position: absolute; text-align: center; bottom: 0; }
+	</style>
+	<script>
+		window.onload=function(){
+			var aInput = document.getElementsByTagName('input');
+			var oBox = document.getElementById('box');
+			var aImg = oBox.children;
+			document.onmousemove=function(ev){
+				var oEvent = ev||event;
+				for(var i=0; i<aImg.length; i++){
+					var a = aImg[i].offsetLeft+aImg[i].offsetWidth/2-oEvent.clientX;
+					var b = aImg[i].offsetTop +oBox.offsetTop+aImg[i].offsetHeight/2 - oEvent.clientY;
+					var c= Math.sqrt(a*a+b*b);
+					var scale =1-c/500;
+					(scale<=0.5)&&(scale=0.5);
+					// aInput[i].value=scale;
+					aImg[i].style.width=128*scale+'px';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="body">
+		<div id="box">
+			<img src="img2/1.png" alt="">
+			<img src="img2/2.png" alt="">
+			<img src="img2/3.png" alt="">
+			<img src="img2/4.png" alt="">
+			<img src="img2/5.png" alt="">
+		</div>
+	</div>
+	<!-- <input type="text" name="" value="" placeholder="">
+	<input type="text" name="" value="" placeholder="">
+	<input type="text" name="" value="" placeholder="">
+	<input type="text" name="" value="" placeholder="">
+	<input type="text" name="" value="" placeholder=""> -->
+	
+</body>
+</html>
